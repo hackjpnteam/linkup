@@ -143,7 +143,7 @@ export default function VocabTestPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="flex items-center gap-3 text-zinc-500">
+        <div className="flex items-center gap-3 text-gray-500">
           <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -157,8 +157,8 @@ export default function VocabTestPage() {
   if (!data || shuffledCards.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-zinc-400">テストできる単語がありません</p>
-        <Link href="/student/vocab" className="text-white hover:text-zinc-300 mt-4 inline-block">
+        <p className="text-gray-500">テストできる単語がありません</p>
+        <Link href="/student/vocab" className="text-gray-800 hover:text-zinc-300 mt-4 inline-block">
           戻る
         </Link>
       </div>
@@ -168,24 +168,24 @@ export default function VocabTestPage() {
   return (
     <div>
       <div className="mb-6">
-        <Link href={`/student/vocab/${params.id}`} className="text-zinc-400 hover:text-white text-sm mb-2 inline-flex items-center gap-1">
+        <Link href={`/student/vocab/${params.id}`} className="text-gray-500 hover:text-gray-800 text-sm mb-2 inline-flex items-center gap-1">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
           {data.deck.title}に戻る
         </Link>
-        <h1 className="text-2xl font-bold text-white">単語テスト</h1>
+        <h1 className="text-2xl font-bold text-gray-800">単語テスト</h1>
       </div>
 
       {mode === 'test' ? (
         <div className="max-w-xl mx-auto">
           {/* Progress Bar */}
           <div className="mb-6">
-            <div className="flex items-center justify-between text-sm text-zinc-400 mb-2">
+            <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
               <span>問題 {currentIndex + 1} / {shuffledCards.length}</span>
               <span>正解率: {results.length > 0 ? accuracy : '-'}%</span>
             </div>
-            <div className="w-full bg-zinc-800 rounded-full h-2">
+            <div className="w-full bg-gray-100 rounded-full h-2">
               <div
                 className="bg-white h-2 rounded-full transition-all"
                 style={{ width: `${((currentIndex + 1) / shuffledCards.length) * 100}%` }}
@@ -194,12 +194,12 @@ export default function VocabTestPage() {
           </div>
 
           {/* Question Card */}
-          <div className="bg-zinc-900 rounded-xl p-8 border border-zinc-800">
+          <div className="bg-white rounded-xl p-8 border border-gray-200">
             <div className="text-center mb-8">
-              <p className="text-zinc-500 text-sm mb-2">この単語の意味を入力してください</p>
-              <h2 className="text-4xl font-bold text-white mb-2">{currentCard.word}</h2>
+              <p className="text-gray-500 text-sm mb-2">この単語の意味を入力してください</p>
+              <h2 className="text-4xl font-bold text-gray-800 mb-2">{currentCard.word}</h2>
               {currentCard.pronunciation && (
-                <p className="text-zinc-500">{currentCard.pronunciation}</p>
+                <p className="text-gray-500">{currentCard.pronunciation}</p>
               )}
             </div>
 
@@ -209,12 +209,12 @@ export default function VocabTestPage() {
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
                 placeholder="意味を入力..."
-                className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors text-center text-lg"
+                className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:border-white transition-colors text-center text-lg"
                 autoFocus
               />
 
               {showHint && currentCard.example && (
-                <p className="text-sm text-zinc-500 mt-3 text-center italic">
+                <p className="text-sm text-gray-500 mt-3 text-center italic">
                   ヒント: {currentCard.example}
                 </p>
               )}
@@ -224,14 +224,14 @@ export default function VocabTestPage() {
                   type="button"
                   onClick={() => setShowHint(true)}
                   disabled={showHint || !currentCard.example}
-                  className="flex-1 px-4 py-3 bg-zinc-800 text-zinc-400 rounded-lg hover:bg-zinc-700 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-3 bg-gray-100 text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   ヒント
                 </button>
                 <button
                   type="button"
                   onClick={handleSkip}
-                  className="flex-1 px-4 py-3 bg-zinc-800 text-zinc-400 rounded-lg hover:bg-zinc-700 hover:text-white transition-colors"
+                  className="flex-1 px-4 py-3 bg-gray-100 text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 transition-colors"
                 >
                   スキップ
                 </button>
@@ -249,7 +249,7 @@ export default function VocabTestPage() {
           {/* Recent Results */}
           {results.length > 0 && (
             <div className="mt-6">
-              <p className="text-sm text-zinc-500 mb-3">直近の回答</p>
+              <p className="text-sm text-gray-500 mb-3">直近の回答</p>
               <div className="flex flex-wrap gap-2">
                 {results.slice(-5).map((r, i) => (
                   <div
@@ -270,10 +270,10 @@ export default function VocabTestPage() {
       ) : (
         <div className="max-w-2xl mx-auto">
           {/* Result Summary */}
-          <div className="bg-zinc-900 rounded-xl p-8 border border-zinc-800 text-center mb-6">
-            <h2 className="text-xl font-bold text-white mb-4">テスト結果</h2>
-            <div className="text-6xl font-bold text-white mb-2">{accuracy}%</div>
-            <p className="text-zinc-400 mb-6">
+          <div className="bg-white rounded-xl p-8 border border-gray-200 text-center mb-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">テスト結果</h2>
+            <div className="text-6xl font-bold text-gray-800 mb-2">{accuracy}%</div>
+            <p className="text-gray-500 mb-6">
               {results.filter(r => r.isCorrect).length} / {results.length} 問正解
             </p>
 
@@ -297,7 +297,7 @@ export default function VocabTestPage() {
               </button>
               <button
                 onClick={() => router.push(`/student/vocab/${params.id}`)}
-                className="px-6 py-3 bg-zinc-800 text-white rounded-lg font-medium hover:bg-zinc-700 transition-colors border border-zinc-700"
+                className="px-6 py-3 bg-gray-100 text-gray-800 rounded-lg font-medium hover:bg-gray-200 transition-colors border border-gray-300"
               >
                 単語一覧に戻る
               </button>
@@ -305,9 +305,9 @@ export default function VocabTestPage() {
           </div>
 
           {/* Detailed Results */}
-          <div className="bg-zinc-900 rounded-xl border border-zinc-800 overflow-hidden">
-            <div className="px-6 py-4 border-b border-zinc-800">
-              <h3 className="font-medium text-white">詳細結果</h3>
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200">
+              <h3 className="font-medium text-gray-800">詳細結果</h3>
             </div>
             <div className="divide-y divide-zinc-800">
               {results.map((result, index) => (
@@ -322,19 +322,19 @@ export default function VocabTestPage() {
                         }`}>
                           {result.isCorrect ? '○' : '×'}
                         </span>
-                        <span className="font-medium text-white">{result.word}</span>
+                        <span className="font-medium text-gray-800">{result.word}</span>
                       </div>
                       <div className="ml-7 text-sm">
-                        <p className="text-zinc-400">
+                        <p className="text-gray-500">
                           正解: <span className="text-emerald-400">{result.correctAnswer}</span>
                         </p>
                         {!result.isCorrect && result.userAnswer && (
-                          <p className="text-zinc-500">
+                          <p className="text-gray-500">
                             あなたの回答: <span className="text-red-400">{result.userAnswer}</span>
                           </p>
                         )}
                         {!result.userAnswer && (
-                          <p className="text-zinc-500">スキップ</p>
+                          <p className="text-gray-500">スキップ</p>
                         )}
                       </div>
                     </div>

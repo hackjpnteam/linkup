@@ -75,7 +75,7 @@ export default async function StudentLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a]">
+    <div className="flex min-h-screen bg-cream">
       <Sidebar items={studentNavItems} user={session.user} />
       <main className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8">
         {children}

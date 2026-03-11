@@ -71,7 +71,7 @@ export default function GrammarLessonPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="flex items-center gap-3 text-zinc-500">
+        <div className="flex items-center gap-3 text-gray-500">
           <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
@@ -85,8 +85,8 @@ export default function GrammarLessonPage() {
   if (!data) {
     return (
       <div className="text-center py-12">
-        <p className="text-zinc-400">レッスンが見つかりません</p>
-        <Link href="/student/grammar" className="text-white hover:text-zinc-300 mt-4 inline-block">
+        <p className="text-gray-500">レッスンが見つかりません</p>
+        <Link href="/student/grammar" className="text-gray-800 hover:text-zinc-300 mt-4 inline-block">
           戻る
         </Link>
       </div>
@@ -95,24 +95,24 @@ export default function GrammarLessonPage() {
 
   return (
     <div>
-      <Link href="/student/grammar" className="text-zinc-400 hover:text-white text-sm mb-2 inline-flex items-center gap-1">
+      <Link href="/student/grammar" className="text-gray-500 hover:text-gray-800 text-sm mb-2 inline-flex items-center gap-1">
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
         文法一覧
       </Link>
-      <h1 className="text-2xl font-bold text-white mb-6">{data.lesson.title}</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">{data.lesson.title}</h1>
 
       {mode === 'content' && (
         <div>
-          <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-800 mb-6">
+          <div className="bg-white rounded-xl p-6 border border-gray-200 mb-6">
             {data.lesson.videoUrl && (
-              <div className="mb-6 aspect-video bg-zinc-800 rounded-lg flex items-center justify-center">
-                <p className="text-zinc-500">動画: {data.lesson.videoUrl}</p>
+              <div className="mb-6 aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                <p className="text-gray-500">動画: {data.lesson.videoUrl}</p>
               </div>
             )}
             <div
-              className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-zinc-300 prose-strong:text-white prose-code:text-zinc-300 prose-code:bg-zinc-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded"
+              className="prose prose-invert max-w-none prose-headings:text-gray-800 prose-p:text-zinc-300 prose-strong:text-gray-800 prose-code:text-zinc-300 prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded"
               dangerouslySetInnerHTML={{ __html: data.lesson.content }}
             />
           </div>
@@ -128,8 +128,8 @@ export default function GrammarLessonPage() {
             )}
 
             {data.progress?.quizScore !== undefined && (
-              <p className="text-zinc-400">
-                前回のスコア: <span className="font-bold text-white">{data.progress.quizScore}%</span>
+              <p className="text-gray-500">
+                前回のスコア: <span className="font-bold text-gray-800">{data.progress.quizScore}%</span>
               </p>
             )}
           </div>
@@ -139,8 +139,8 @@ export default function GrammarLessonPage() {
       {mode === 'quiz' && (
         <div className="space-y-4">
           {data.lesson.questions.map((q, idx) => (
-            <div key={q.index} className="bg-zinc-900 rounded-xl p-6 border border-zinc-800">
-              <p className="font-medium text-white mb-4">Q{idx + 1}. {q.question}</p>
+            <div key={q.index} className="bg-white rounded-xl p-6 border border-gray-200">
+              <p className="font-medium text-gray-800 mb-4">Q{idx + 1}. {q.question}</p>
               <div className="space-y-2">
                 {q.options.map((option, optIdx) => (
                   <label
@@ -148,7 +148,7 @@ export default function GrammarLessonPage() {
                     className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
                       answers[q.index] === optIdx
                         ? 'bg-white/10 border border-white/20'
-                        : 'hover:bg-zinc-800 border border-transparent'
+                        : 'hover:bg-gray-100 border border-transparent'
                     }`}
                   >
                     <input
@@ -167,7 +167,7 @@ export default function GrammarLessonPage() {
           <div className="flex gap-3">
             <button
               onClick={() => setMode('content')}
-              className="px-6 py-3 bg-zinc-800 text-white rounded-lg font-medium hover:bg-zinc-700 transition-colors"
+              className="px-6 py-3 bg-gray-100 text-gray-800 rounded-lg font-medium hover:bg-zinc-700 transition-colors"
             >
               戻る
             </button>
@@ -184,8 +184,8 @@ export default function GrammarLessonPage() {
 
       {mode === 'result' && quizResult && (
         <div>
-          <div className="bg-zinc-900 rounded-xl p-8 border border-zinc-800 mb-6 text-center">
-            <h2 className="text-xl font-bold text-white mb-4">テスト結果</h2>
+          <div className="bg-white rounded-xl p-8 border border-gray-200 mb-6 text-center">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">テスト結果</h2>
             <p className={`text-5xl font-bold mb-2 ${
               quizResult.score >= 80 ? 'text-emerald-400' :
               quizResult.score >= 60 ? 'text-yellow-400' :
@@ -193,7 +193,7 @@ export default function GrammarLessonPage() {
             }`}>
               {quizResult.score}%
             </p>
-            <p className="text-zinc-400">
+            <p className="text-gray-500">
               {quizResult.correctCount} / {quizResult.totalCount} 問正解
             </p>
           </div>
@@ -227,7 +227,7 @@ export default function GrammarLessonPage() {
                 setAnswers({});
                 setQuizResult(null);
               }}
-              className="px-6 py-3 bg-zinc-800 text-white rounded-lg font-medium hover:bg-zinc-700 transition-colors"
+              className="px-6 py-3 bg-gray-100 text-gray-800 rounded-lg font-medium hover:bg-zinc-700 transition-colors"
             >
               もう一度
             </button>

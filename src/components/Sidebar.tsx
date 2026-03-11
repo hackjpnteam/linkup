@@ -22,30 +22,14 @@ interface SidebarProps {
 function Logo({ className = '' }: { className?: string }) {
   return (
     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className={className}>
-      <g transform="translate(8.5, 13)">
-        <path
-          d="M13.3 15.2 L2.34 1 V12.6"
-          fill="none"
-          stroke="url(#logo_gradient1)"
-          strokeWidth="1.86"
-        />
-        <path
-          d="M11.825 1.5 V13.1"
-          strokeWidth="1.86"
-          stroke="url(#logo_gradient2)"
-        />
-      </g>
       <defs>
-        <linearGradient id="logo_gradient1" x1="9.95555" y1="11.1226" x2="15.4778" y2="17.9671" gradientUnits="userSpaceOnUse">
-          <stop stopColor="white" />
-          <stop offset="0.604072" stopColor="white" stopOpacity="0" />
-          <stop offset="1" stopColor="white" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="logo_gradient2" x1="11.8222" y1="1.40039" x2="11.791" y2="9.62542" gradientUnits="userSpaceOnUse">
-          <stop stopColor="white" />
-          <stop offset="1" stopColor="white" stopOpacity="0" />
+        <linearGradient id="logo_bg_gradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#F5A623" />
+          <stop offset="1" stopColor="#E08B4A" />
         </linearGradient>
       </defs>
+      <rect width="40" height="40" rx="10" fill="url(#logo_bg_gradient)" />
+      <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="18" fontWeight="bold" fontStyle="italic" fontFamily="system-ui">L</text>
     </svg>
   );
 }
@@ -62,10 +46,10 @@ export default function Sidebar({ items, user }: SidebarProps) {
 
   const SidebarContent = () => (
     <>
-      <div className="p-4 border-b border-zinc-800">
+      <div className="p-4 border-b border-primary/20">
         <Link href="/dashboard" className="flex items-center gap-2">
           <Logo />
-          <span className="text-xl font-bold text-white">LinkUp</span>
+          <span className="text-xl font-bold text-white italic">LinkUp</span>
         </Link>
       </div>
 
@@ -80,8 +64,8 @@ export default function Sidebar({ items, user }: SidebarProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${
                     isActive
-                      ? 'bg-white text-black'
-                      : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                      ? 'bg-primary text-white'
+                      : 'text-zinc-400 hover:bg-primary/10 hover:text-white'
                   }`}
                 >
                   {item.icon}
@@ -93,9 +77,9 @@ export default function Sidebar({ items, user }: SidebarProps) {
         </ul>
       </nav>
 
-      <div className="p-4 border-t border-zinc-800">
+      <div className="p-4 border-t border-primary/20">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 bg-zinc-800 rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
             <span className="text-white font-medium">
               {user.name.charAt(0)}
             </span>
@@ -107,7 +91,7 @@ export default function Sidebar({ items, user }: SidebarProps) {
         </div>
         <button
           onClick={() => signOut({ callbackUrl: '/login' })}
-          className="w-full px-3 py-2 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white rounded-lg transition-colors text-left flex items-center gap-2"
+          className="w-full px-3 py-2 text-sm text-zinc-400 hover:bg-primary/10 hover:text-white rounded-lg transition-colors text-left flex items-center gap-2"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -121,15 +105,15 @@ export default function Sidebar({ items, user }: SidebarProps) {
   return (
     <>
       {/* Mobile Header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-black border-b border-zinc-800 px-4 py-3">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-primary-gradient border-b border-primary/20 px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-2">
             <Logo />
-            <span className="text-lg font-bold text-white">LinkUp</span>
+            <span className="text-lg font-bold text-white italic">LinkUp</span>
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
             aria-label="メニュー"
           >
             {mobileMenuOpen ? (
@@ -155,7 +139,7 @@ export default function Sidebar({ items, user }: SidebarProps) {
 
       {/* Mobile Sidebar */}
       <aside
-        className={`lg:hidden fixed top-0 left-0 z-50 w-72 h-full bg-black border-r border-zinc-800 flex flex-col transform transition-transform duration-300 ${
+        className={`lg:hidden fixed top-0 left-0 z-50 w-72 h-full bg-primary-gradient border-r border-primary/20 flex flex-col transform transition-transform duration-300 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -163,7 +147,7 @@ export default function Sidebar({ items, user }: SidebarProps) {
       </aside>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex w-64 bg-black border-r border-zinc-800 min-h-screen flex-col fixed">
+      <aside className="hidden lg:flex w-64 bg-primary-gradient border-r border-primary/20 min-h-screen flex-col fixed">
         <SidebarContent />
       </aside>
 
