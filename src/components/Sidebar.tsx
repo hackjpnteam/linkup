@@ -46,7 +46,7 @@ export default function Sidebar({ items, user }: SidebarProps) {
 
   const SidebarContent = () => (
     <>
-      <div className="p-4 border-b border-primary/20">
+      <div className="p-4 border-b border-white/20">
         <Link href="/dashboard" className="flex items-center gap-2">
           <Logo />
           <span className="text-xl font-bold text-white italic">LinkUp</span>
@@ -64,8 +64,8 @@ export default function Sidebar({ items, user }: SidebarProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all ${
                     isActive
-                      ? 'bg-primary text-white'
-                      : 'text-zinc-400 hover:bg-primary/10 hover:text-white'
+                      ? 'bg-white/20 text-white font-semibold'
+                      : 'text-white/70 hover:bg-white/10 hover:text-white'
                   }`}
                 >
                   {item.icon}
@@ -77,7 +77,7 @@ export default function Sidebar({ items, user }: SidebarProps) {
         </ul>
       </nav>
 
-      <div className="p-4 border-t border-primary/20">
+      <div className="p-4 border-t border-white/20">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
             <span className="text-white font-medium">
@@ -86,12 +86,12 @@ export default function Sidebar({ items, user }: SidebarProps) {
           </div>
           <div>
             <p className="font-medium text-white">{user.name}</p>
-            <p className="text-sm text-zinc-500">{roleLabel}</p>
+            <p className="text-sm text-white/60">{roleLabel}</p>
           </div>
         </div>
         <button
           onClick={() => signOut({ callbackUrl: '/login' })}
-          className="w-full px-3 py-2 text-sm text-zinc-400 hover:bg-primary/10 hover:text-white rounded-lg transition-colors text-left flex items-center gap-2"
+          className="w-full px-3 py-2 text-sm text-white/70 hover:bg-white/10 hover:text-white rounded-lg transition-colors text-left flex items-center gap-2"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
