@@ -121,7 +121,7 @@
 
     /* Content Container */
     .slide-content {
-      max-width: 960px;
+      max-width: 1000px;
       width: 100%;
       margin: 0 auto;
       text-align: center;
@@ -290,10 +290,10 @@
     }
 
     .feature-list li {
-      padding: 10px 0;
-      padding-left: 32px;
+      padding: 8px 0;
+      padding-left: 28px;
       position: relative;
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: var(--gray-600);
       border-bottom: 1px solid var(--gray-100);
     }
@@ -306,13 +306,13 @@
       content: "✓";
       position: absolute;
       left: 0;
-      top: 10px;
-      width: 20px;
-      height: 20px;
+      top: 8px;
+      width: 18px;
+      height: 18px;
       background: var(--accent-green);
       color: white;
       border-radius: 50%;
-      font-size: 11px;
+      font-size: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -363,12 +363,12 @@
     .spec-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85em;
+      font-size: 0.8em;
       text-align: left;
     }
 
     .spec-table td {
-      padding: 14px 20px;
+      padding: 12px 16px;
       border-bottom: 1px solid var(--gray-100);
     }
 
@@ -442,6 +442,49 @@
     .model-card p {
       font-size: 0.7em;
       color: var(--gray-500);
+    }
+
+    /* Screenshot */
+    .screenshot {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      border: 1px solid var(--gray-200);
+    }
+
+    .screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .screenshot-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screenshot-large {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .screenshot-medium {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* Feature with Screenshot Layout */
+    .feature-layout {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 32px;
+      width: 100%;
+      align-items: start;
+    }
+
+    .feature-info {
+      text-align: left;
     }
 
     /* Utility */
@@ -596,216 +639,163 @@
         </div>
       </section>
 
-      <!-- 5. Feature: Auth -->
+      <!-- 5. Login Screen -->
       <section class="soft">
         <div class="slide-content">
-          <span class="label green">FEATURE 01</span>
-          <h2>認証・ユーザー管理</h2>
-          <div class="grid grid-2 mt-2">
-            <div class="card">
-              <h3>実装機能</h3>
-              <ul class="feature-list">
-                <li>NextAuth.js によるセキュア認証</li>
-                <li>3つのロール（受講生・コーチ・管理者）</li>
-                <li>ロールベースのアクセス制御</li>
-                <li>セッション管理・自動リダイレクト</li>
-                <li>bcrypt によるパスワードハッシュ化</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>技術仕様</h3>
-              <div class="table-container" style="box-shadow: none;">
-                <table class="spec-table">
-                  <tr><td>認証方式</td><td>Credentials Provider</td></tr>
-                  <tr><td>セッション</td><td>JWT Token</td></tr>
-                  <tr><td>パスワード</td><td>bcrypt (salt: 10)</td></tr>
-                  <tr><td>保護ルート</td><td>Middleware + Server Auth</td></tr>
-                </table>
-              </div>
+          <span class="label green">SCREEN 01</span>
+          <h2>ログイン画面</h2>
+          <div class="screenshot-container mt-2">
+            <div class="screenshot screenshot-large">
+              <img src="/screenshots/login.png" alt="ログイン画面">
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 6. Feature: Dashboard -->
+      <!-- 6. Dashboard -->
       <section class="light">
         <div class="slide-content">
-          <span class="label green">FEATURE 02</span>
+          <span class="label green">SCREEN 02</span>
           <h2>ダッシュボード</h2>
-          <div class="grid grid-2 mt-2">
-            <div class="card">
-              <h3>実装機能</h3>
-              <ul class="feature-list">
-                <li>週間・月間学習時間の可視化</li>
-                <li>学習内訳（単語・文法・発音・課題）</li>
-                <li>目標進捗の表示</li>
-                <li>予定されたセッション一覧</li>
-                <li>未完了課題の確認</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>データモデル</h3>
-              <div class="table-container" style="box-shadow: none;">
-                <table class="spec-table">
-                  <tr><td>StudyLog</td><td>学習記録（日時・時間・種別）</td></tr>
-                  <tr><td>Goal</td><td>目標（週間・月間・最終）</td></tr>
-                  <tr><td>CalendarEvent</td><td>スケジュールイベント</td></tr>
-                  <tr><td>AssignmentState</td><td>課題の進捗状態</td></tr>
-                </table>
+          <div class="feature-layout mt-2">
+            <div class="feature-info">
+              <div class="card">
+                <h3>実装機能</h3>
+                <ul class="feature-list">
+                  <li>週間・月間学習時間の可視化</li>
+                  <li>学習内訳表示</li>
+                  <li>目標進捗の表示</li>
+                  <li>予定セッション一覧</li>
+                  <li>未完了課題の確認</li>
+                </ul>
               </div>
+            </div>
+            <div class="screenshot">
+              <img src="/screenshots/dashboard.png" alt="ダッシュボード">
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 7. Feature: Vocab -->
+      <!-- 7. Vocab -->
       <section class="soft">
         <div class="slide-content">
-          <span class="label green">FEATURE 03</span>
+          <span class="label green">SCREEN 03</span>
           <h2>単語帳機能</h2>
-          <div class="grid grid-2 mt-2">
-            <div class="card">
-              <h3>実装機能</h3>
-              <ul class="feature-list">
-                <li>デッキ管理（複数単語帳対応）</li>
-                <li>フラッシュカード形式の学習モード</li>
-                <li>テストモード（意味入力式）</li>
-                <li>進捗トラッキング（新規・学習中・習得）</li>
-                <li>レベル別分類（初級・中級・上級）</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>データ構造</h3>
-              <div class="table-container" style="box-shadow: none;">
-                <table class="spec-table">
-                  <tr><td>VocabDeck</td><td>デッキ情報・カード配列</td></tr>
-                  <tr><td>VocabCard</td><td>単語・意味・発音・例文</td></tr>
-                  <tr><td>VocabProgress</td><td>ユーザー別学習進捗</td></tr>
-                </table>
+          <div class="feature-layout mt-2">
+            <div class="feature-info">
+              <div class="card">
+                <h3>実装機能</h3>
+                <ul class="feature-list">
+                  <li>デッキ管理</li>
+                  <li>フラッシュカード学習</li>
+                  <li>テストモード</li>
+                  <li>進捗トラッキング</li>
+                  <li>レベル別分類</li>
+                </ul>
               </div>
-              <p class="small mt-1" style="text-align: center;">正解/不正解回数に基づく自動ステータス更新</p>
+            </div>
+            <div class="screenshot">
+              <img src="/screenshots/vocab-list.png" alt="単語帳">
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 8. Feature: Grammar -->
+      <!-- 8. Grammar -->
       <section class="light">
         <div class="slide-content">
-          <span class="label green">FEATURE 04</span>
+          <span class="label green">SCREEN 04</span>
           <h2>文法学習機能</h2>
-          <div class="grid grid-2 mt-2">
-            <div class="card">
-              <h3>実装機能</h3>
-              <ul class="feature-list">
-                <li>レッスンコンテンツ表示</li>
-                <li>4択クイズ形式のテスト</li>
-                <li>解説表示機能</li>
-                <li>スコア記録・進捗管理</li>
-                <li>レベル別カリキュラム</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>データ構造</h3>
-              <div class="table-container" style="box-shadow: none;">
-                <table class="spec-table">
-                  <tr><td>GrammarLesson</td><td>タイトル・内容・問題配列</td></tr>
-                  <tr><td>GrammarQuestion</td><td>問題文・選択肢・正解・解説</td></tr>
-                  <tr><td>GrammarProgress</td><td>完了状態・スコア</td></tr>
-                </table>
+          <div class="feature-layout mt-2">
+            <div class="feature-info">
+              <div class="card">
+                <h3>実装機能</h3>
+                <ul class="feature-list">
+                  <li>レッスンコンテンツ</li>
+                  <li>4択クイズテスト</li>
+                  <li>解説表示機能</li>
+                  <li>スコア記録</li>
+                  <li>レベル別カリキュラム</li>
+                </ul>
               </div>
+            </div>
+            <div class="screenshot">
+              <img src="/screenshots/grammar-list.png" alt="文法学習">
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 9. Feature: Pronunciation -->
+      <!-- 9. Pronunciation -->
       <section class="soft">
         <div class="slide-content">
-          <span class="label green">FEATURE 05</span>
+          <span class="label green">SCREEN 05</span>
           <h2>発音練習機能</h2>
-          <div class="grid grid-2 mt-2">
-            <div class="card">
-              <h3>実装機能</h3>
-              <ul class="feature-list">
-                <li>ターゲットテキスト表示</li>
-                <li>カテゴリ別分類（日常会話・ビジネス等）</li>
-                <li>レベル別難易度設定</li>
-                <li>練習履歴の記録</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>データ構造</h3>
-              <div class="table-container" style="box-shadow: none;">
-                <table class="spec-table">
-                  <tr><td>PronunciationExercise</td><td>練習課題情報</td></tr>
-                  <tr><td>targetText</td><td>練習対象テキスト</td></tr>
-                  <tr><td>category</td><td>カテゴリ分類</td></tr>
-                  <tr><td>level</td><td>難易度レベル</td></tr>
-                </table>
+          <div class="feature-layout mt-2">
+            <div class="feature-info">
+              <div class="card">
+                <h3>実装機能</h3>
+                <ul class="feature-list">
+                  <li>ターゲットテキスト表示</li>
+                  <li>カテゴリ別分類</li>
+                  <li>レベル別難易度</li>
+                  <li>練習履歴の記録</li>
+                </ul>
               </div>
+            </div>
+            <div class="screenshot">
+              <img src="/screenshots/pronunciation-list.png" alt="発音練習">
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 10. Feature: Calendar -->
+      <!-- 10. Calendar -->
       <section class="light">
         <div class="slide-content">
-          <span class="label green">FEATURE 06</span>
-          <h2>カレンダー・スケジュール管理</h2>
-          <div class="grid grid-2 mt-2">
-            <div class="card">
-              <h3>実装機能</h3>
-              <ul class="feature-list">
-                <li>月間カレンダービュー</li>
-                <li>イベント種別（コーチング・学習・課題）</li>
-                <li>日程変更リクエスト機能</li>
-                <li>コーチとのセッション管理</li>
-                <li>ステータス管理</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>データ構造</h3>
-              <div class="table-container" style="box-shadow: none;">
-                <table class="spec-table">
-                  <tr><td>CalendarEvent</td><td>イベント情報</td></tr>
-                  <tr><td>type</td><td>coaching / study / assignment</td></tr>
-                  <tr><td>changeRequest</td><td>変更リクエスト情報</td></tr>
-                  <tr><td>status</td><td>scheduled / completed / cancelled</td></tr>
-                </table>
+          <span class="label green">SCREEN 06</span>
+          <h2>カレンダー</h2>
+          <div class="feature-layout mt-2">
+            <div class="feature-info">
+              <div class="card">
+                <h3>実装機能</h3>
+                <ul class="feature-list">
+                  <li>月間カレンダービュー</li>
+                  <li>イベント種別管理</li>
+                  <li>日程変更リクエスト</li>
+                  <li>セッション管理</li>
+                  <li>ステータス管理</li>
+                </ul>
               </div>
+            </div>
+            <div class="screenshot">
+              <img src="/screenshots/calendar.png" alt="カレンダー">
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 11. Feature: Assignments -->
+      <!-- 11. Assignments -->
       <section class="soft">
         <div class="slide-content">
-          <span class="label green">FEATURE 07</span>
-          <h2>課題管理機能</h2>
-          <div class="grid grid-2 mt-2">
-            <div class="card">
-              <h3>実装機能</h3>
-              <ul class="feature-list">
-                <li>課題一覧表示（フィルタリング対応）</li>
-                <li>締め切り管理</li>
-                <li>進捗ステータス管理</li>
-                <li>コーチによるフィードバック</li>
-                <li>スコア記録</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>データ構造</h3>
-              <div class="table-container" style="box-shadow: none;">
-                <table class="spec-table">
-                  <tr><td>Assignment</td><td>課題情報（タイトル・説明・期限）</td></tr>
-                  <tr><td>AssignmentState</td><td>ユーザー別進捗状態</td></tr>
-                  <tr><td>status</td><td>pending / in_progress / completed</td></tr>
-                  <tr><td>feedback</td><td>コーチからのフィードバック</td></tr>
-                </table>
+          <span class="label green">SCREEN 07</span>
+          <h2>課題管理</h2>
+          <div class="feature-layout mt-2">
+            <div class="feature-info">
+              <div class="card">
+                <h3>実装機能</h3>
+                <ul class="feature-list">
+                  <li>課題一覧表示</li>
+                  <li>締め切り管理</li>
+                  <li>進捗ステータス</li>
+                  <li>フィードバック</li>
+                  <li>スコア記録</li>
+                </ul>
               </div>
+            </div>
+            <div class="screenshot">
+              <img src="/screenshots/assignments.png" alt="課題管理">
             </div>
           </div>
         </div>
