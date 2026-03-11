@@ -48,7 +48,7 @@ export default async function CoachLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-cream">
+    <div className="flex min-h-screen" style={{ backgroundColor: '#FFFBF5' }}>
       <Sidebar items={coachNavItems} user={session.user} />
       <main className="flex-1 p-4 lg:p-8 pt-20 lg:pt-8">{children}</main>
     </div>
