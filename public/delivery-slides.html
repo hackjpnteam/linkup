@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkUp - 納品書</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
+  <style>
+    :root {
+      --primary: #F5A623;
+      --primary-dark: #E08B4A;
+      --blue: #4285F4;
+      --green: #34A853;
+      --yellow: #F4B400;
+      --coral: #EA6B5D;
+      --purple: #9B72CB;
+      --orange: #F09937;
+      --black: #1a1a1a;
+      --white: #ffffff;
+      --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5;
+      --gray-300: #d4d4d4;
+      --gray-400: #a3a3a3;
+      --gray-500: #737373;
+      --cream: #FFFBF5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      line-height: 1.75;
+    }
+
+    .reveal {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 24px;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .reveal h1 {
+      font-size: 2.4em;
+      margin-bottom: 0.5em;
+    }
+
+    .reveal h2 {
+      font-size: 1.6em;
+      margin-bottom: 0.5em;
+    }
+
+    .reveal h3 {
+      font-size: 1.1em;
+      margin-bottom: 0.3em;
+    }
+
+    .reveal section {
+      height: 100%;
+      padding: 48px 64px;
+    }
+
+    /* Theme Classes */
+    .reveal section.dark {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .reveal section.soft {
+      background: var(--gray-100);
+      color: var(--black);
+    }
+
+    .reveal section.cream {
+      background: var(--cream);
+      color: var(--black);
+    }
+
+    .reveal section.primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+    }
+
+    /* Dot Divider */
+    .dot-divider {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin: 24px 0;
+    }
+
+    .dot-divider span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-divider .d1 { background: var(--green); }
+    .dot-divider .d2 { background: var(--blue); }
+    .dot-divider .d3 { background: var(--yellow); }
+    .dot-divider .d4 { background: var(--coral); }
+    .dot-divider .d5 { background: var(--purple); }
+    .dot-divider .d6 { background: var(--orange); }
+
+    /* Label Tags */
+    .label-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 0.65em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+
+    .label-tag.orange { background: var(--primary); color: var(--white); }
+    .label-tag.blue { background: var(--blue); color: var(--white); }
+    .label-tag.green { background: var(--green); color: var(--white); }
+    .label-tag.purple { background: var(--purple); color: var(--white); }
+    .label-tag.coral { background: var(--coral); color: var(--white); }
+
+    /* Cards */
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: left;
+    }
+
+    .card-dark {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: left;
+    }
+
+    .card-border {
+      border: 2px solid var(--black);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: left;
+      background: var(--white);
+    }
+
+    /* Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+    }
+
+    /* Lists */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+
+    .feature-list li {
+      padding: 8px 0;
+      padding-left: 28px;
+      position: relative;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Spec Table */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85em;
+      text-align: left;
+    }
+
+    .spec-table th {
+      background: var(--black);
+      color: var(--white);
+      padding: 12px 16px;
+      font-weight: 600;
+    }
+
+    .spec-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .spec-table tr:nth-child(even) td {
+      background: var(--gray-100);
+    }
+
+    /* Highlight */
+    .highlight {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      padding: 16px 24px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    /* Tech Stack */
+    .tech-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--gray-100);
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: 500;
+      margin: 4px;
+    }
+
+    .tech-badge.primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    /* Small text */
+    .small {
+      font-size: 0.75em;
+      color: var(--gray-500);
+    }
+
+    .medium {
+      font-size: 0.9em;
+    }
+
+    .muted {
+      color: var(--gray-400);
+    }
+
+    .bold {
+      font-weight: 700;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-left {
+      text-align: left;
+    }
+
+    .mt-1 { margin-top: 16px; }
+    .mt-2 { margin-top: 32px; }
+    .mb-1 { margin-bottom: 16px; }
+    .mb-2 { margin-bottom: 32px; }
+
+    /* Logo */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .logo-box {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-box span {
+      color: white;
+      font-size: 36px;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .logo-text {
+      font-size: 48px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--black);
+    }
+
+    .dark .logo-text {
+      color: var(--white);
+    }
+
+    /* Number Circle */
+    .number-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1em;
+      margin-bottom: 12px;
+    }
+
+    /* Icon box */
+    .icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .icon-box.orange { background: rgba(245, 166, 35, 0.15); }
+    .icon-box.blue { background: rgba(66, 133, 244, 0.15); }
+    .icon-box.green { background: rgba(52, 168, 83, 0.15); }
+    .icon-box.purple { background: rgba(155, 114, 203, 0.15); }
+    .icon-box.coral { background: rgba(234, 107, 93, 0.15); }
+
+    /* Slide specific */
+    .reveal .slides section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .content-wrapper {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid var(--gray-200);
+    }
+
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75em;
+      color: var(--gray-500);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Title Slide -->
+      <section class="dark">
+        <div class="content-wrapper">
+          <div class="logo-container">
+            <div class="logo-box"><span>L</span></div>
+            <span class="logo-text">LinkUp</span>
+          </div>
+          <h1>システム納品書</h1>
+          <p class="muted">英語学習プラットフォーム開発プロジェクト</p>
+          <div class="dot-divider mt-2">
+            <span class="d1"></span>
+            <span class="d2"></span>
+            <span class="d3"></span>
+            <span class="d4"></span>
+            <span class="d5"></span>
+            <span class="d6"></span>
+          </div>
+          <p class="small mt-2">納品日: 2026年3月11日</p>
+        </div>
+      </section>
+
+      <!-- Project Overview -->
+      <section class="soft">
+        <div class="content-wrapper">
+          <span class="label-tag orange">PROJECT OVERVIEW</span>
+          <h2>プロジェクト概要</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>プロジェクト名</h3>
+              <p class="bold">LinkUp - 英語学習プラットフォーム</p>
+              <p class="small muted mt-1">コーチングと自習を統合した英語学習システム</p>
+            </div>
+            <div class="card">
+              <h3>開発期間</h3>
+              <p class="bold">2026年3月</p>
+              <p class="small muted mt-1">設計・開発・テスト・デプロイ完了</p>
+            </div>
+          </div>
+          <div class="card mt-1">
+            <h3>システム概要</h3>
+            <p>受講生・コーチ・管理者の3つのロールに対応した英語学習プラットフォーム。単語帳、文法、発音練習、課題管理、スケジュール管理機能を統合し、効率的な学習体験を提供します。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="cream">
+        <div class="content-wrapper">
+          <span class="label-tag blue">SYSTEM SCALE</span>
+          <h2>システム規模</h2>
+          <div class="stats-grid mt-2">
+            <div class="stat-card">
+              <div class="stat-number">29</div>
+              <div class="stat-label">APIエンドポイント</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">20+</div>
+              <div class="stat-label">ページ数</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">10</div>
+              <div class="stat-label">データモデル</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">3</div>
+              <div class="stat-label">ユーザーロール</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tech Stack -->
+      <section class="soft">
+        <div class="content-wrapper">
+          <span class="label-tag purple">TECHNOLOGY</span>
+          <h2>技術スタック</h2>
+          <div class="grid-3 mt-2">
+            <div class="card text-center">
+              <div class="icon-box orange" style="margin: 0 auto 12px;">⚛️</div>
+              <h3>フロントエンド</h3>
+              <div class="mt-1">
+                <span class="tech-badge primary">Next.js 15</span>
+                <span class="tech-badge">React 19</span>
+                <span class="tech-badge">TypeScript</span>
+                <span class="tech-badge">Tailwind CSS 4</span>
+              </div>
+            </div>
+            <div class="card text-center">
+              <div class="icon-box green" style="margin: 0 auto 12px;">🗄️</div>
+              <h3>バックエンド</h3>
+              <div class="mt-1">
+                <span class="tech-badge primary">MongoDB</span>
+                <span class="tech-badge">Mongoose</span>
+                <span class="tech-badge">NextAuth.js</span>
+                <span class="tech-badge">API Routes</span>
+              </div>
+            </div>
+            <div class="card text-center">
+              <div class="icon-box purple" style="margin: 0 auto 12px;">☁️</div>
+              <h3>インフラ</h3>
+              <div class="mt-1">
+                <span class="tech-badge primary">Vercel</span>
+                <span class="tech-badge">MongoDB Atlas</span>
+                <span class="tech-badge">GitHub</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 1: Authentication -->
+      <section class="cream">
+        <div class="content-wrapper">
+          <span class="label-tag green">FEATURE 01</span>
+          <h2>認証・ユーザー管理システム</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>仕様</h3>
+              <ul class="feature-list">
+                <li>NextAuth.jsによるセキュア認証</li>
+                <li>3つのロール（受講生・コーチ・管理者）</li>
+                <li>ロールベースのアクセス制御</li>
+                <li>セッション管理・自動リダイレクト</li>
+                <li>bcryptによるパスワードハッシュ化</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>実装詳細</h3>
+              <table class="spec-table">
+                <tr><td>認証方式</td><td>Credentials Provider</td></tr>
+                <tr><td>セッション</td><td>JWT Token</td></tr>
+                <tr><td>パスワード</td><td>bcrypt (salt rounds: 10)</td></tr>
+                <tr><td>保護ルート</td><td>Middleware + Server Auth</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 2: Dashboard -->
+      <section class="soft">
+        <div class="content-wrapper">
+          <span class="label-tag green">FEATURE 02</span>
+          <h2>ダッシュボード</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>仕様</h3>
+              <ul class="feature-list">
+                <li>週間・月間学習時間の可視化</li>
+                <li>学習内訳（単語・文法・発音・課題）</li>
+                <li>目標進捗の表示</li>
+                <li>予定されたセッション一覧</li>
+                <li>未完了課題の確認</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>データモデル</h3>
+              <table class="spec-table">
+                <tr><td>StudyLog</td><td>学習記録（日時・時間・種別）</td></tr>
+                <tr><td>Goal</td><td>目標（週間・月間・最終）</td></tr>
+                <tr><td>CalendarEvent</td><td>スケジュールイベント</td></tr>
+                <tr><td>AssignmentState</td><td>課題の進捗状態</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 3: Vocabulary -->
+      <section class="cream">
+        <div class="content-wrapper">
+          <span class="label-tag green">FEATURE 03</span>
+          <h2>単語帳機能</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>仕様</h3>
+              <ul class="feature-list">
+                <li>デッキ管理（複数単語帳対応）</li>
+                <li>フラッシュカード形式の学習モード</li>
+                <li>テストモード（意味入力式）</li>
+                <li>進捗トラッキング（新規・学習中・習得）</li>
+                <li>レベル別分類（初級・中級・上級）</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>データ構造</h3>
+              <table class="spec-table">
+                <tr><td>VocabDeck</td><td>デッキ情報・カード配列</td></tr>
+                <tr><td>VocabCard</td><td>単語・意味・発音・例文</td></tr>
+                <tr><td>VocabProgress</td><td>ユーザー別学習進捗</td></tr>
+              </table>
+              <p class="small muted mt-1">正解/不正解回数に基づく自動ステータス更新</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 4: Grammar -->
+      <section class="soft">
+        <div class="content-wrapper">
+          <span class="label-tag green">FEATURE 04</span>
+          <h2>文法学習機能</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>仕様</h3>
+              <ul class="feature-list">
+                <li>レッスンコンテンツ表示（Markdown対応）</li>
+                <li>4択クイズ形式のテスト</li>
+                <li>解説表示機能</li>
+                <li>スコア記録・進捗管理</li>
+                <li>レベル別カリキュラム</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>データ構造</h3>
+              <table class="spec-table">
+                <tr><td>GrammarLesson</td><td>タイトル・内容・問題配列</td></tr>
+                <tr><td>GrammarQuestion</td><td>問題文・選択肢・正解・解説</td></tr>
+                <tr><td>GrammarProgress</td><td>完了状態・スコア</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 5: Pronunciation -->
+      <section class="cream">
+        <div class="content-wrapper">
+          <span class="label-tag green">FEATURE 05</span>
+          <h2>発音練習機能</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>仕様</h3>
+              <ul class="feature-list">
+                <li>ターゲットテキスト表示</li>
+                <li>カテゴリ別分類（日常会話・ビジネス等）</li>
+                <li>レベル別難易度設定</li>
+                <li>練習履歴の記録</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>データ構造</h3>
+              <table class="spec-table">
+                <tr><td>PronunciationExercise</td><td>練習課題情報</td></tr>
+                <tr><td>targetText</td><td>練習対象テキスト</td></tr>
+                <tr><td>category</td><td>カテゴリ分類</td></tr>
+                <tr><td>level</td><td>難易度レベル</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 6: Calendar -->
+      <section class="soft">
+        <div class="content-wrapper">
+          <span class="label-tag green">FEATURE 06</span>
+          <h2>カレンダー・スケジュール管理</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>仕様</h3>
+              <ul class="feature-list">
+                <li>月間カレンダービュー</li>
+                <li>イベント種別（コーチング・学習・課題）</li>
+                <li>日程変更リクエスト機能</li>
+                <li>コーチとのセッション管理</li>
+                <li>ステータス管理（予定・完了・キャンセル）</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>データ構造</h3>
+              <table class="spec-table">
+                <tr><td>CalendarEvent</td><td>イベント情報</td></tr>
+                <tr><td>type</td><td>coaching / study / assignment</td></tr>
+                <tr><td>changeRequest</td><td>変更リクエスト情報</td></tr>
+                <tr><td>status</td><td>scheduled / completed / cancelled</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature 7: Assignments -->
+      <section class="cream">
+        <div class="content-wrapper">
+          <span class="label-tag green">FEATURE 07</span>
+          <h2>課題管理機能</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>仕様</h3>
+              <ul class="feature-list">
+                <li>課題一覧表示（フィルタリング対応）</li>
+                <li>締め切り管理</li>
+                <li>進捗ステータス管理</li>
+                <li>コーチによるフィードバック</li>
+                <li>スコア記録</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>データ構造</h3>
+              <table class="spec-table">
+                <tr><td>Assignment</td><td>課題情報（タイトル・説明・期限）</td></tr>
+                <tr><td>AssignmentState</td><td>ユーザー別進捗状態</td></tr>
+                <tr><td>status</td><td>pending / in_progress / completed</td></tr>
+                <tr><td>feedback</td><td>コーチからのフィードバック</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UI/UX -->
+      <section class="soft">
+        <div class="content-wrapper">
+          <span class="label-tag purple">UI/UX DESIGN</span>
+          <h2>デザイン・UI実装</h2>
+          <div class="grid-3 mt-2">
+            <div class="card text-center">
+              <div class="icon-box orange" style="margin: 0 auto 12px;">🎨</div>
+              <h3>カラーテーマ</h3>
+              <p class="small">クリーム色ベースの温かみのあるデザイン。オレンジグラデーションのサイドバー。</p>
+            </div>
+            <div class="card text-center">
+              <div class="icon-box blue" style="margin: 0 auto 12px;">📱</div>
+              <h3>レスポンシブ</h3>
+              <p class="small">モバイル・タブレット・デスクトップ対応。ハンバーガーメニュー実装。</p>
+            </div>
+            <div class="card text-center">
+              <div class="icon-box green" style="margin: 0 auto 12px;">✨</div>
+              <h3>インタラクション</h3>
+              <p class="small">スムーズなトランジション、ホバーエフェクト、ローディング状態表示。</p>
+            </div>
+          </div>
+          <div class="card mt-1">
+            <h3>主要コンポーネント</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
+              <span class="tech-badge">Sidebar</span>
+              <span class="tech-badge">Navigation</span>
+              <span class="tech-badge">Cards</span>
+              <span class="tech-badge">Tables</span>
+              <span class="tech-badge">Forms</span>
+              <span class="tech-badge">Buttons</span>
+              <span class="tech-badge">Progress Bars</span>
+              <span class="tech-badge">Loading States</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Database Schema -->
+      <section class="cream">
+        <div class="content-wrapper">
+          <span class="label-tag coral">DATABASE</span>
+          <h2>データベース設計</h2>
+          <div class="grid-4 mt-2">
+            <div class="card-border text-center">
+              <h3>User</h3>
+              <p class="small">ユーザー情報・ロール管理</p>
+            </div>
+            <div class="card-border text-center">
+              <h3>VocabDeck</h3>
+              <p class="small">単語デッキ・カード</p>
+            </div>
+            <div class="card-border text-center">
+              <h3>GrammarLesson</h3>
+              <p class="small">文法レッスン・クイズ</p>
+            </div>
+            <div class="card-border text-center">
+              <h3>Pronunciation</h3>
+              <p class="small">発音練習課題</p>
+            </div>
+            <div class="card-border text-center">
+              <h3>Assignment</h3>
+              <p class="small">課題・提出状態</p>
+            </div>
+            <div class="card-border text-center">
+              <h3>CalendarEvent</h3>
+              <p class="small">スケジュール管理</p>
+            </div>
+            <div class="card-border text-center">
+              <h3>Goal</h3>
+              <p class="small">学習目標</p>
+            </div>
+            <div class="card-border text-center">
+              <h3>StudyLog</h3>
+              <p class="small">学習記録</p>
+            </div>
+          </div>
+          <p class="small muted text-center mt-2">MongoDB + Mongoose ODM によるドキュメント指向データベース設計</p>
+        </div>
+      </section>
+
+      <!-- Deployment -->
+      <section class="soft">
+        <div class="content-wrapper">
+          <span class="label-tag purple">DEPLOYMENT</span>
+          <h2>デプロイ・運用環境</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>本番環境</h3>
+              <table class="spec-table">
+                <tr><td>ホスティング</td><td>Vercel</td></tr>
+                <tr><td>URL</td><td>linkup-app-livid.vercel.app</td></tr>
+                <tr><td>データベース</td><td>MongoDB Atlas</td></tr>
+                <tr><td>リージョン</td><td>AWS Tokyo (ap-northeast-1)</td></tr>
+              </table>
+            </div>
+            <div class="card">
+              <h3>CI/CD</h3>
+              <table class="spec-table">
+                <tr><td>リポジトリ</td><td>GitHub</td></tr>
+                <tr><td>自動デプロイ</td><td>main ブランチ push 時</td></tr>
+                <tr><td>プレビュー</td><td>PR ごとに自動生成</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Deliverables -->
+      <section class="cream">
+        <div class="content-wrapper">
+          <span class="label-tag orange">DELIVERABLES</span>
+          <h2>納品物一覧</h2>
+          <div class="grid-2 mt-2">
+            <div class="card">
+              <h3>ソースコード</h3>
+              <ul class="feature-list">
+                <li>Next.js アプリケーション一式</li>
+                <li>TypeScript 型定義</li>
+                <li>Mongoose モデル定義</li>
+                <li>API ルート実装</li>
+                <li>コンポーネント・スタイル</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>環境・設定</h3>
+              <ul class="feature-list">
+                <li>Vercel デプロイ設定</li>
+                <li>MongoDB Atlas 接続設定</li>
+                <li>環境変数設定</li>
+                <li>デモデータ投入スクリプト</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Summary -->
+      <section class="primary">
+        <div class="content-wrapper text-center">
+          <h2 style="color: white;">納品完了</h2>
+          <p style="color: rgba(255,255,255,0.9);">LinkUp 英語学習プラットフォームの開発が完了しました。</p>
+          <div class="dot-divider mt-2">
+            <span style="background: white;"></span>
+            <span style="background: white;"></span>
+            <span style="background: white;"></span>
+            <span style="background: white;"></span>
+            <span style="background: white;"></span>
+            <span style="background: white;"></span>
+          </div>
+          <div class="mt-2">
+            <p class="bold" style="font-size: 1.2em;">本番URL</p>
+            <p style="color: rgba(255,255,255,0.9);">https://linkup-app-livid.vercel.app</p>
+          </div>
+          <p class="small mt-2" style="color: rgba(255,255,255,0.7);">ご不明点がございましたらお気軽にお問い合わせください。</p>
+        </div>
+      </section>
+
+      <!-- Thank You -->
+      <section class="dark">
+        <div class="content-wrapper text-center">
+          <div class="logo-container">
+            <div class="logo-box"><span>L</span></div>
+            <span class="logo-text">LinkUp</span>
+          </div>
+          <h2>Thank You</h2>
+          <div class="dot-divider mt-2">
+            <span class="d1"></span>
+            <span class="d2"></span>
+            <span class="d3"></span>
+            <span class="d4"></span>
+            <span class="d5"></span>
+            <span class="d6"></span>
+          </div>
+          <p class="muted mt-2">2026年3月 納品</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      width: 1280,
+      height: 720,
+      margin: 0,
+      controls: true,
+      progress: true,
+      center: true,
+      transition: 'slide',
+    });
+  </script>
+</body>
+</html>
